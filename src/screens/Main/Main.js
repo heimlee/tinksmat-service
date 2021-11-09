@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import { MainLogo } from './components/MainLogo/MainLogo';
 import { MainTitle } from './components/MainTitle/MainTitle'
+import { MainCompaniesList } from './components/MainCompaniesList/MainCompaniesList';
 
 export const Main = () => {
   return(
@@ -18,7 +19,12 @@ export const Main = () => {
       }}
     >
       <MainLogo />
-      <MainTitle />
+      <Grid
+        container
+      >
+        <MainTitle />
+        <MainCompaniesList />
+      </Grid>
     </Box>
   );
 }
