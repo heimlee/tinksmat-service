@@ -14,6 +14,11 @@ function App() {
         'sans-serif',
       ].join(','),
     },
+    palette: {
+      background: {
+        default: "#F5F7F6"
+      },
+    },
   });
 
   return (
