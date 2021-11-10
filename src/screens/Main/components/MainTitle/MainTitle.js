@@ -16,29 +16,29 @@ const MainTitleLogo = styled(Paper)({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '16px',
+  boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.25)',
   width: '88px',
   height: '88px',
-  cursor: 'pointer',
   background: '#FFFFFF',
-  boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.25)',
+  cursor: 'pointer',
 });
 
 const MainTitleTextHead = styled(Typography)({
+  display: 'flex',
+  alignItems: 'center',
   fontSize: '24px',
   lineHeight: '38px',
   fontWeight: '700',
-  display: 'flex',
-  alignItems: 'center',
 });
 
 const MainTitleTextDescription = styled(Typography)({
-  width: '100%',
   paddingRight: '17px',
-  fontFamily: 'Open Sans',
-  fontWeight: 'normal',
+  width: '100%',
+  color: '#2D2C30',
   fontSize: '12px',
   lineHeight: '18px',
-  color: '#2D2C30',
+  fontFamily: 'Open Sans',
+  fontWeight: 'normal',
 });
 
 export const MainTitle = () => {
@@ -65,7 +65,7 @@ export const MainTitle = () => {
         xs
         sx={{
           width: '100%',
-          paddingLeft: '24px'
+          paddingLeft: '24px',
         }}
       >
         <Grid

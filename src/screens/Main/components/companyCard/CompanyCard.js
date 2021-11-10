@@ -1,56 +1,80 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 
+import { removeAddedCompany } from '../mainCompaniesList/actions/mainCompaniesListActions';
+import { fetchAddCompanyToSystem } from '../mainCompaniesList/actions/companyAddToSystemActions';
+
 const CompanyCardContainer = styled(Paper)({
-  borderRadius: '16px',
-  width: '100%',
-  height: '168px',
-  border: '2px solid #FFFFFF',
   boxSizing: 'border-box',
-  boxShadow: '0px 0px 8px rgba(196, 196, 196, 0.25)',
-  background: '#F5F7F6',
-  padding: '23px 24px 26px',
   display: 'flex',
   flexDirection: 'column',
+  border: '2px solid #FFFFFF',
+  borderRadius: '16px',
+  boxShadow: '0px 0px 8px rgba(196, 196, 196, 0.25)',
+  width: '100%',
+  height: '168px',
+  padding: '23px 24px 26px',
+  background: '#F5F7F6',
+});
+
+const AddedCompanyCardContainer = styled(Paper)({
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexDirection: 'column',
+  border: '2px solid #FFFFFF',
+  borderRadius: '16px',
+  boxShadow: '0px 0px 8px rgba(196, 196, 196, 0.25)',
+  width: '100%',
+  height: '168px',
+  padding: '23px 24px 26px',
+  background: '#FFFFFF',
 });
 
 const CompanyCardTitle = styled(Typography)({
-  fontStyle: 'normal',
-  fontWeight: '700',
-  fontSize: '24px',
-  lineHeight: '38px',
   display: 'flex',
   alignItems: 'center',
-  color: '#000000',
   height: '48px',
+  fontSize: '24px',
+  lineHeight: '38px',
+  fontWeight: '700',
+  fontStyle: 'normal',
+  color: '#000000',
 });
 
 const CompanyCardDescription = styled(Typography)({
-  fontFamily: 'Open Sans',
-  fontWeight: '400',
+  height: '24px',
   fontSize: '12px',
   lineHeight: '18px',
+  fontFamily: 'Open Sans',
+  fontWeight: '400',
   color: '#2D2C30',
   mixBlendMode: 'normal',
-  height: '24px',
 });
 
 const ButtonAddCompanyToSystem = styled(Button)({
-  fontWeight: '700',
-  fontSize: '12px',
-  lineHeight: '24px',
   display: 'flex',
   alignItems: 'center',
+  marginTop: '24px',
+  padding: '0',
+  height: '24px',
+  width: '96px',
+  fontSize: '12px',
+  lineHeight: '24px',
+  fontWeight: '700',
   textTransform: 'uppercase',
   color: '#1445F5',
-  height: '24px',
-  padding: '0',
-  width: '96px',
-  marginTop: '24px',
 });
 
 export const CompanyCard = ({ company }) => {
+  const dispatch = useDispatch();
+  
+  const handleAddCompanyToSystem = () => {
+    dispatch(removeAddedCompany(company.registryCode));
+    dispatch(fetchAddCompanyToSystem(company.registryCode));
+  }
+
   return(
     <Grid
       item
@@ -60,11 +84,17 @@ export const CompanyCard = ({ company }) => {
       lg={4}
       xl={3}
     >
-      <CompanyCardContainer>
-        <CompanyCardTitle>{company.name}</CompanyCardTitle>
-        <CompanyCardDescription>Reg.nr: {company.registryCode}</CompanyCardDescription>
-        <ButtonAddCompanyToSystem variant="text">ADD to SYSTEM</ButtonAddCompanyToSystem>
-      </CompanyCardContainer>
+      {company.id === null ? 
+        <CompanyCardContainer>
+          <CompanyCardTitle>{company.name}</CompanyCardTitle>
+          <CompanyCardDescription>Reg.nr: {company.registryCode}</CompanyCardDescription>
+          <ButtonAddCompanyToSystem variant="text" onClick={() => handleAddCompanyToSystem()}>ADD to SYSTEM</ButtonAddCompanyToSystem>
+        </CompanyCardContainer> :
+        <AddedCompanyCardContainer>
+          <CompanyCardTitle>{company.name}</CompanyCardTitle>
+          <CompanyCardDescription>Reg.nr: {company.registryCode}</CompanyCardDescription>
+        </AddedCompanyCardContainer>
+      }
     </Grid>
   );
 };
