@@ -50,7 +50,7 @@ const ButtonAddCompanyToSystem = styled(Button)({
   marginTop: '24px',
 });
 
-export const CompanyCard = () => {
+export const CompanyCard = ({ company }) => {
   return(
     <Grid
       item
@@ -61,8 +61,8 @@ export const CompanyCard = () => {
       xl={3}
     >
       <CompanyCardContainer>
-        <CompanyCardTitle>ABC Company OÜ</CompanyCardTitle>
-        <CompanyCardDescription>Reg.nr: 345678</CompanyCardDescription>
+        <CompanyCardTitle>{company.name}</CompanyCardTitle>
+        <CompanyCardDescription>Reg.nr: {company.registryCode}</CompanyCardDescription>
         <ButtonAddCompanyToSystem variant="text">ADD to SYSTEM</ButtonAddCompanyToSystem>
       </CompanyCardContainer>
     </Grid>
